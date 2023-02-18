@@ -1,0 +1,96 @@
+@media(max-width:81.25em) {
+    .article-block {
+        width: 70%;
+    }
+
+    .students-icons {
+        height: 27rem;
+    }
+
+    .form {
+        gap: 6.4rem;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .form2 {
+        width: 60%;
+    }
+}
+
+@media(max-width:65em) {
+    .article-block {
+        width: 80%;
+    }
+}
+
+@media(max-width:50em) {
+    html {
+        font-size: 9px !important;
+    }
+
+    .students-icons img {
+        width: 90%;
+    }
+
+    .first-student-icon {
+        display: flex;
+        justify-content: end;
+    }
+
+    .a-link {
+        display: none;
+    }
+}
+
+@media(max-width:40em) {
+    .goya-icon {
+        width: 15%;
+    }
+
+    .goya-icon img {
+        width: 100%;
+    }
+
+    html {
+        font-size: 8px !important;
+    }
+
+    .btn {
+        padding: 0.8rem 2.4rem;
+    }
+
+    .courses {
+        width: 30%;
+    }
+
+    .form2 {
+        width: 100%;
+        height: 100vh;
+        padding-top: 6.4rem;
+    }
+}
+
+@media(max-width:37.5em) {
+    .students-icons img {
+        width: 100%;
+    }
+
+    .courses {
+        display: none;
+    }
+
+    .article-block {
+        width: 90%;
+    }
+}
+
+@media(max-width:27.5em) {
+    html {
+        font-size: 6px !important;
+    }
+
+    .students-icons {
+        height: 26vh;
+    }
+}

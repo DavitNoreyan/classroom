@@ -1,0 +1,85 @@
+@media(max-width:78.75em) {
+  html {
+    font-size: 8px;
+  }
+}
+
+
+@media(max-width:62.5em) {
+  .main-courses {
+    grid-template-columns: 80%;
+    justify-content: center;
+  }
+
+
+}
+
+
+
+@media(max-width:50em) {
+  .comp-cont {
+    margin: 3.6rem 2.4rem;
+  }
+
+  .nav p {
+    display: none;
+  }
+
+  .navicon {
+    display: block !important;
+
+    border-radius: 50%;
+  }
+
+  .navicon:hover,
+  .navicon:active {
+    background-color: black;
+    color: aliceblue;
+  }
+
+  .log-out-p {
+    display: none !important;
+  }
+
+
+
+
+  .log-out-icon:hover,
+  .log-out-icon:active {
+    padding: 0.8rem;
+    background-color: black !important;
+    color: aliceblue !important;
+    border-radius: 50%;
+  }
+}
+
+
+@media(max-width:37.5em) {
+  html {
+    font-size: 7px;
+  }
+
+  .main-courses {
+    grid-template-columns: 90%;
+  }
+
+  .logo-cont {
+    width: 15%;
+  }
+}
+
+
+
+@media(max-width:30em) {
+  html {
+    font-size: 6px;
+  }
+
+}
+
+
+@media(max-width:25em) {
+  html {
+    font-size: 5px;
+  }
+}

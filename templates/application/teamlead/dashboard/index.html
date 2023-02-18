@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <link rel="stylesheet" href="../../../../static/menthors/menthorspage_css/media.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../../../static/menthors/menthorspage_css/style.css">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Menthor's Page</title>
+</head>
+
+<body>
+  <header class="header">
+    <div class="logo-cont">
+      <img src="../../../../static/menthors/menthors_image/goya_logo.png" alt="goya-logo" class="goya-logo">
+    </div>
+    <nav class="nav">
+      <div>
+
+        <a href="#">
+          <p>Home</p> <ion-icon class="navicon" name="home-outline"></ion-icon>
+        </a>
+      </div>
+      <div>
+
+        <a href="#">
+          <p>About us</p> <ion-icon class="navicon" name="people-outline"></ion-icon>
+        </a>
+      </div>
+      <div>
+
+        <a href="#">
+          <p>Contact</p> <ion-icon class="navicon" name="call-outline"></ion-icon>
+        </a>
+      </div>
+    </nav>
+    <div class="usName-log">
+      <div class="username-cont">
+        <ion-icon class="add-icon" name="person-outline"></ion-icon>
+        <p class="username-text">{{ username }}</p>
+      </div>
+      <div class="log-out">
+        <a class="log-out-p" href="{{ url_for('logout') }}">Log out</a>
+        <ion-icon class="log-out-icon" name="log-out-outline"></ion-icon>
+      </div>
+    </div>
+  </header>`
+  <main class="main">
+
+    <div class="courses-cont cont1">
+      <div class="courses-header">
+
+        <ion-icon class="course-icon" name="checkmark-outline"></ion-icon>
+
+        <h3>IT Courses</h3>
+      </div>
+      <div class="courses-names">
+        {% for course in attached_training_course_by_courses %}
+        {% if course %}
+          <div class="course-name">
+            <img class="course-icon" src="https://assets.stickpng.com/images/5848152fcef1014c0b5e4967.png">
+          <p>{{ course.course_name.upper() }}</p>
+        </div>
+        {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+
+    <div class="students stud1">
+      <header class="students-header">
+        <h3>Students</h3>
+      </header>
+      <div class="example">
+        <p class="item">Full Name</p>
+        <p class="item">Progress</p>
+        <p class="item">Next Exam</p>
+        <p class="item item4">Date</p>
+      </div>
+
+        <div class="table">
+          <div class="student">
+            {% for user in users %}
+              <p>{{ user.firstname.capitalize() }} {{ user.lastname.capitalize() }}</p>
+                <div class="progress-item">
+                  <p>{{ user.fullprogress }}%</p>
+                    <div class="progress">
+                      <div class="progress-size"></div>
+                    </div>
+                </div>
+                    <div class="course-name item3">
+                      <img class="course-icon" src="https://assets.stickpng.com/images/5848152fcef1014c0b5e4967.png">
+                      <p>Python</p>
+                    </div>
+                <div class="item4">
+                  <ion-icon name="calendar-clear-outline"></ion-icon>
+                  <p>May 22</p>
+                </div>
+            {% endfor %}
+          </div>
+
+        </div>
+    </div>
+
+
+
+
+
+
+    <div class="courses-cont cont2">
+      <div class="courses-header">
+
+        <ion-icon class="course-icon" name="checkmark-outline"></ion-icon>
+
+        <h3>Exams</h3>
+      </div>
+      <div class="courses-names">
+        <div class="course-name">
+          <img class="course-icon" src="https://assets.stickpng.com/images/5848152fcef1014c0b5e4967.png">
+          <p>Python</p>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="students stud2">
+      <header class="students-header">
+        <h3>Students last exams</h3>
+      </header>
+      <div class="example">
+        <p class="item">Username</p>
+        <p class="item">Last exam</p>
+        <p class="item">Score</p>
+        <p class="item item4">file</p>
+      </div>
+      <div class="table">
+        {% for user in users %}
+         <div class="student">
+          <p>{{user.firstname}} {{user.lastname}}</p>
+
+          <div class="course-name item3">
+            <img class="course-icon" src="https://assets.stickpng.com/images/5848152fcef1014c0b5e4967.png">
+            <p>Python</p>
+          </div>
+          <div class="progress-item">
+            <p>84/100</p>
+          </div>
+          <div class="item4">
+            <ion-icon name="document-outline"></ion-icon>
+            <a href="#">Python test</a>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+<!-- teamlead functional -->
+    <div>
+        <h1>
+          Team Lead
+        </h1>
+      <h2>
+        Create Full Course Functional
+      </h2>
+        <div>
+          <h2>Attached Courses for {{ team_of_teamlead.team_name }} Team</h2>
+          {% for course in attached_training_course_by_courses %}
+          <form action="{{ url_for('teamlead_delete_course') }}" method="POST">
+            <label for="course_name">Course Name:</label>
+            <input type="text" id="course_name" name="course" value="{{ course.course_name }}"><br>
+            <input type="submit" value="Delete"><br>
+            --------------------------------
+          </form>
+
+          {% endfor %}
+        </div>
+        <div>
+          <h2>Available Courses</h2>
+            <form action="{{ url_for('teamlead_add_course') }}" method="POST">
+              <input list="avcourslist" name="course">
+                <datalist id="avcourslist">
+                  {% for course in available_not_attached_courses %}
+                    <option value="{{ course.course_name }}">
+                  {% endfor %}
+                </datalist><br>
+              <input type="text" id="course_queue" name="course_queue" value=""><br>
+              <input type="submit">
+            </form>
+        </div>
+    </div>
+<!--    -->
+  </main>
+</body>
+
+
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+</html>

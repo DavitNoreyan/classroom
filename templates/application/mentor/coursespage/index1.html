@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../../../../static/menthors/courses_css/style.css">
+  <link rel="stylesheet" href="../../../../static/menthors/courses_css/media.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <title>Courses</title>
+</head>
+
+<body>
+  <header class="header">
+    <div class="logo-cont">
+      <img src="../../../../static/menthors/menthors_image/goya_logo.png" alt="goya-logo" class="goya-logo">
+    </div>
+    <nav class="nav">
+      <div>
+
+        <a href="#">
+          <p>Home</p> <ion-icon class="navicon" name="home-outline"></ion-icon>
+        </a>
+      </div>
+      <div>
+
+        <a href="#">
+          <p>About us</p> <ion-icon class="navicon" name="people-outline"></ion-icon>
+        </a>
+      </div>
+      <div>
+
+        <a href="#">
+          <p>Contact</p> <ion-icon class="navicon" name="call-outline"></ion-icon>
+        </a>
+      </div>
+    </nav>
+    <div class="usName-log">
+      <div class="username-cont">
+        <ion-icon class="add-icon" name="person-outline"></ion-icon>
+        <p class="username-text">{{ username }}</p>
+      </div>
+      <div class="log-out">
+        <a class="log-out-p" href="{{ url_for('logout')}}">Log out</a>
+        <ion-icon class="log-out-icon" name="log-out-outline"></ion-icon>
+      </div>
+    </div>
+  </header>
+  <main class="main">
+    <div class="illustration">
+      <div class="comp-cont">
+        <img src="../../../../static/menthors/menthors_image/Group.svg" alt="" class="comp">
+      </div>
+      <div class="heading">
+        <h2>IT Courses</h2>
+      </div>
+    </div>
+    <section class="main-courses">
+      <div class="course">
+        <div class="course-img-box">
+          <img src="../../../../static/menthors/courses_images/python_course.png" alt="" class="course-img">
+        </div>
+        <div class="course-text-cont">
+          <div>
+            <p class="course-name">PYTHON</p>
+            <p class="course-text">
+              Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+              Lorem Ipsum has been the industry's standard dummy text ever since the 1500s
+            </p>
+          </div>
+
+          <div class="icons-part">
+            <div class="icon-div">
+              <ion-icon name="star-outline"></ion-icon>
+              <p>Created</p>
+            </div>
+            <div class="icon-div">
+              <ion-icon name="pencil-outline"></ion-icon>
+              <p>Updated</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="course">
+        <div class="course-img-box">
+          <img src="../../../../static/menthors/courses_images/python_course.png" alt="" class="course-img">
+        </div>
+        <div class="course-text-cont">
+          <div>
+            <p class="course-name">PYTHON</p>
+            <p class="course-text">
+              Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+              Lorem Ipsum has been the industry's standard dummy text ever since the 1500s
+            </p>
+          </div>
+
+          <div class="icons-part">
+            <div class="icon-div">
+              <ion-icon name="star-outline"></ion-icon>
+              <p>Created</p>
+            </div>
+            <div class="icon-div">
+              <ion-icon name="pencil-outline"></ion-icon>
+              <p>Updated</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="course">
+        <div class="course-img-box">
+          <img src="../../../../static/menthors/courses_images/python_course.png" alt="" class="course-img">
+        </div>
+        <div class="course-text-cont">
+          <div>
+            <p class="course-name">PYTHON</p>
+            <p class="course-text">
+              Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+              Lorem Ipsum has been the industry's standard dummy text ever since the 1500s
+            </p>
+          </div>
+
+          <div class="icons-part">
+            <div class="icon-div">
+              <ion-icon name="star-outline"></ion-icon>
+              <p>Created</p>
+            </div>
+            <div class="icon-div">
+              <ion-icon name="pencil-outline"></ion-icon>
+              <p>Updated</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="course">
+        <div class="course-img-box">
+          <img src="../../../../static/menthors/courses_images/python_course.png" alt="" class="course-img">
+        </div>
+        <div class="course-text-cont">
+          <div>
+            <p class="course-name">PYTHON</p>
+            <p class="course-text">
+              Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+              Lorem Ipsum has been the industry's standard dummy text ever since the 1500s
+            </p>
+          </div>
+
+          <div class="icons-part">
+            <div class="icon-div">
+              <ion-icon name="star-outline"></ion-icon>
+              <p>Created</p>
+            </div>
+            <div class="icon-div">
+              <ion-icon name="pencil-outline"></ion-icon>
+              <p>Updated</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+</body>
+
+</html>

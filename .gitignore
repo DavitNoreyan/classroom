@@ -1,0 +1,7 @@
+/__pycache__
+*.py[cod]
+/.idea
+/classroom_env
+classroom.db
+/templates/test_templates
+test.py

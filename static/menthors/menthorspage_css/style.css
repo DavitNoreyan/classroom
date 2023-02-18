@@ -1,0 +1,296 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 10px;
+}
+
+body {
+  font-family: 'Noto Sans', sans-serif;
+
+}
+
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 1.8rem;
+  padding-bottom: 2.4rem;
+  border-bottom: 1px solid #a1aeb4;
+  font-weight: 500;
+}
+
+.logo-cont img {
+  width: 90%;
+}
+
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1.6rem;
+}
+
+
+.nav a {
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.6rem;
+  font-size: 1.8rem;
+  color: black;
+  transition: all 0.3s;
+}
+
+
+.nav a:hover,
+.nav a:active {
+  font-size: 2.2rem;
+}
+
+
+.usName-log {
+  font-size: 1.8rem;
+  display: flex;
+  gap: 2.4rem;
+
+}
+
+.usName-log p {
+  display: flex;
+  align-items: center;
+}
+
+.username-cont {
+  display: flex;
+  gap: 0.6rem;
+  align-items: center;
+}
+
+.add-icon {
+  width: 2.4rem;
+  height: 2.4rem;
+}
+
+.log-out {
+  display: flex;
+  gap: 0.8rem;
+  align-items: center;
+  transition: all 0.3s;
+}
+
+.log-out:hover,
+.log-out:active {
+  text-decoration: underline;
+}
+
+.log-out-icon {
+  width: 2.8rem;
+  height: 2.8rem;
+}
+
+/* ============================================================================================== */
+/* header */
+
+.table {
+  height: 50vh;
+  overflow-y: auto;
+}
+
+.courses-names {
+  height: 50vh;
+  overflow-y: auto;
+}
+
+.table::-webkit-scrollbar {
+  width: 5px;
+}
+
+.table::-webkit-scrollbar-thumb {
+  background: rgb(219, 203, 203);
+  border-radius: 2rem;
+}
+
+.table::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+
+.courses-names::-webkit-scrollbar {
+  width: 5px;
+
+}
+
+.courses-names::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 2rem;
+}
+
+.courses-names::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+
+
+main {
+  display: grid;
+  grid-template-columns: 2.9fr 7fr;
+  margin: 3.2rem auto;
+  width: 90%;
+  row-gap: 9.4rem;
+  column-gap: 3.2rem;
+}
+
+.section {
+  margin-top: 3.2rem;
+  margin-bottom: 2rem;
+  display: grid;
+  grid-template-columns: 2.9fr 7fr;
+  gap: 6rem;
+  width: 90%;
+  height: 60vh;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+.courses-cont {
+  padding: 3rem;
+
+  border-radius: 10px;
+  background-color: #E3E5E6;
+  overflow-y: auto;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.3);
+}
+
+
+.courses-header {
+
+  display: flex;
+  font-size: 1.6rem;
+  color: #10C98F;
+  gap: 0.6rem;
+}
+
+.courses-header h3 {
+  font-weight: 400;
+}
+
+.course-icon {
+  width: 2.4rem;
+  height: 2.4rem;
+  --ionicon-stroke-width: 64px;
+  display: flex;
+  align-items: center;
+}
+
+/* 
+.course-icon {
+  width: 1.8rem;
+  height: 1.8rem;
+} */
+
+
+.courses-names {
+  padding-left: 3rem;
+  padding-right: 4rem;
+}
+
+.course-name {
+  display: flex;
+  padding-top: 1.8rem;
+  font-size: 1.8rem;
+  gap: 1rem;
+  align-items: center;
+}
+
+
+
+.students-header {
+  font-size: 2.4rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.students-header h3 {
+  font-weight: 400;
+  color: #10C98F;
+}
+
+
+
+.example {
+  font-size: 1.6rem;
+  padding: 3rem 2rem 2rem 2rem;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 0.5fr;
+}
+
+.item4 {
+  display: flex;
+  justify-content: end;
+  gap: 0.4rem;
+  align-items: center;
+}
+
+
+.student {
+  border-radius: 0.8rem;
+  background-color: rgba(86, 115, 127, 0.07);
+  font-size: 1.6rem;
+  padding: 1.6rem 2rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 0.5fr;
+  margin-bottom: 1.2rem;
+}
+
+
+.progress {
+  width: 60%;
+  background-color: #D9D9D9;
+  height: 1rem;
+  border-radius: 9px;
+}
+
+.progress-item {
+  gap: 0.8rem;
+  display: flex;
+  align-items: center;
+
+}
+
+.progress-size {
+  width: 84%;
+  background-color: #56737F;
+  height: 1rem;
+  border-radius: 9px;
+}
+
+.item3 {
+  padding-top: 0;
+}
+
+.navicon {
+  padding: 0.8rem;
+  width: 2.8rem;
+  height: 2.8rem;
+  display: none;
+}
+
+
+.item4 ion-icon {
+  width: 2.4rem;
+  height: 2.4rem;
+}
+
+
+/* ============================== */

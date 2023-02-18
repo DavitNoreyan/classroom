@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../../../static/admin/dashboard_css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../../static/admin/dashboard_css/media.css">
+  <title>Dashboard</title>
+</head>
+
+<body>
+  <form class="form" action="{{ url_for('admin_register') }}" method=post>
+    {{ form.csrf_token }}
+    <div class="form-header">
+      <h3>Add user</h3>
+      <div class="close-icon-div">
+        <ion-icon class="form-close" name="close-outline"></ion-icon>
+      </div>
+    </div>
+    <div class="form-cont half">
+      {{ form.firstname.label }}
+      {{ form.firstname(placeholder="First Name") }}
+
+    </div>
+    <div class="form-cont half">
+          {{ form.lastname.label }}
+          {{ form.lastname(placeholder="Last Name") }}
+    </div>
+    <div class="form-cont full">
+          {{ form.email.label }}
+          {{ form.email(placeholder="Email") }}
+          {% if form.email.errors %}
+          <ul class=errors>
+            {% for error in form.email.errors %}
+          <li>{{ error }}</li>
+          {% endfor %}
+          {% endif %}
+          </ul>
+
+    </div>
+    <div class="form-cont half">
+      {{ form.username.label }}
+      {{ form.username(placeholder="Username") }}
+    </div>
+    <div class="form-cont half">
+      {{ form.phone.label }}
+
+      <div class="phone-cont">
+        <div class="flag-cont">
+          <img src="../../../static/admin/dashboard_images/am.svg" alt="" class="flag-icon">
+          <p class="num">+374</p>
+        </div>
+          {{ form.phone(placeholder="Phone") }}
+
+      </div>
+    </div>
+    <div class="form-cont half passwd">
+      {{ form.password.label }}
+      <div class="passwd-child">
+        {{ form.password(placeholder="Password") }}
+
+        <div class="eye-cont">
+          <ion-icon class="close-eye" name="eye-off-outline"></ion-icon>
+          <ion-icon class="eye none" name="eye-outline"></ion-icon>
+        </div>
+      </div>
+    </div>
+    <div class="form-cont half passwd">
+            {{ form.password_confirm.label }}
+      <div class="passwd-child">
+            {{ form.password_confirm(placeholder="Confirm Password") }}
+
+        <div class="eye-cont">
+          <ion-icon class="close-eye2" name="eye-off-outline"></ion-icon>
+          <ion-icon class="eye2 none" name="eye-outline"></ion-icon>
+        </div>
+      </div>
+    </div>
+<!--    -->
+    <div>
+      <label for="start">Birth Day:</label>
+        <input type="date" id="start" name="birthday" value=""  min="1900-01-01" max="{{ now_date }}">
+    </div>
+<!--    -->
+    <!-- delete   -->
+    <div>
+      <input list="roles" name="role">
+        <datalist id="roles">
+          {% for role in roles %}
+            <option value="{{ role.role_name }}">
+          {% endfor %}
+        </datalist>
+    </div>
+<!--    -->
+    <div class="for-form-buttons">
+      <button type="button" class="form-cancel">Cancel</button>
+
+      <button type=submit class="form-btn">Submit</button>
+    </div>
+  </form>
+
+
+
+  <main class="main-container">
+    <section class="left-container">
+      <div class="img-box">
+        <img src="../../../static/admin/dashboard_images/white_logo.png" alt="goya-logo" class="logo-icon">
+      </div>
+      <div class="dropdown">
+        <div class="drop-icons">
+          <ion-icon class="menu" name="menu-outline"></ion-icon>
+          <ion-icon class="nonmenu none" name="close-outline"></ion-icon>
+        </div>
+        <nav class="nav">
+          <div id="admins">Admins</div>
+          <div id="menthors">Menthors</div>
+          <div id="students">Students</div>
+          <div id="teamleads">Team Leads</div>
+          <div id="teams">Teams</div>
+          <div>
+            {% with messages = get_flashed_messages() %}
+              {% if messages %}
+                <ul class=flashes>
+                {% for message in messages %}
+                  <li>{{ message }}</li>
+                {% endfor %}
+                </ul>
+              {% endif %}
+            {% endwith %}
+            <form action="{{ url_for('admin_add_team') }}" method="POST">
+              <label for="team">Team:</label><br>
+              <input type="text" id="team" name="team" value=""><br>
+              <input type="submit" value="Submit">
+            </form>
+          </div>
+          <div>
+            {% with messages = get_flashed_messages() %}
+              {% if messages %}
+                <ul class=flashes>
+                {% for message in messages %}
+                  <li>{{ message }}</li>
+                {% endfor %}
+                </ul>
+              {% endif %}
+            {% endwith %}
+            <form action="{{ url_for('admin_add_course') }}" method="POST">
+              <label for="team">Add Course:</label><br>
+              <input type="text" id="course" name="course" value=""><br>
+              <input type="submit" value="Submit">
+            </form>
+          </div>
+          <div>
+            <form action="{{ url_for('admin_attach_teamlead') }}" method="POST">
+              <label for="atleads">Attach Team Lead:</label><br>
+              <input list="atleads" name="lead">
+                <datalist id="atleads">
+                  {% for lead in team_leads_wthout_team %}
+                  <option value="{{ lead.username }}">
+                  {% endfor %}
+                </datalist>
+              <input list="atteam" name="team">
+                <datalist id="atteam">
+                  {% for team in teams_without_lead %}
+                  <option value="{{ team.team_name }}">
+                  {% endfor %}
+                </datalist>
+              <input type="submit">
+            </form>
+          </div>
+           <div>
+            <form action="{{ url_for('admin_attach_course_mentor') }}" method="POST">
+              <label for="atleads">Attach Mentor to Course:</label><br>
+              <input list="atmens" name="mentor">
+                <datalist id="atmens">
+                  {% for user in users %}
+                    {% if user.role == 'mentor' %}
+                    <option value="{{ user.username }}">
+                    {% endif %}
+                  {% endfor %}
+                </datalist>
+              <input list="atcourse" name="course">
+                <datalist id="atcourse">
+                  {% for course in avalaible_courses %}
+                  <option value="{{ course.course_name }}">
+                  {% endfor %}
+                </datalist>
+              <input type="submit">
+            </form>
+          </div>
+
+        </nav>
+      </div>
+
+
+    </section>
+
+    <section class="right-container">
+      <div class="main-dashboard">
+        <div class="admin-cont">
+          <p class="admin-name">@{{ username }}</p>
+          <a class="admin-log" href="{{ url_for('admin_logout') }}">log out</a>
+        </div>
+
+        <div id="admins-container">
+          <header class="secondary-header">
+            <h2 class="secondary-heading">Admins</h2>
+            <div class="add-container for-admins">
+              <p>Add admin</p>
+              <ion-icon class="add-icon" name="person-add-outline"></ion-icon>
+            </div>
+          </header>
+          <div class="example">
+            <div class="item">Name</div>
+            <div class="item">Email address</div>
+            <div class="item">Phone</div>
+          </div>
+          {% for user in users %}
+          {% if user.role == 'admin' %}
+          <div class="person">
+            <div class="item item1">
+              <div class="text-div">
+                <p>{{ user.firstname }} {{ user.lastname }}</p>
+                <p class="usName">@{{ user.username }}</p>
+              </div>
+            </div>
+            <div class="item item2">
+              <p>{{ user.email }}</p>
+            </div>
+            <div class="item item3">
+              <p>{{ user.phone }}</p>
+            </div>
+            <div class="item item4">
+              <!-- delete anelu icon -->
+              <ion-icon name="trash-outline" class="delete person-icon"></ion-icon>
+              <!-- edit anelu icon -->
+              <ion-icon name="create-outline" class="edit person-icon"></ion-icon>
+            </div>
+          </div>
+        {% endif %}
+        {% endfor %}
+        </div>
+        <div id="menthors-container" class="none">
+          <header class="secondary-header">
+            <h2 class="secondary-heading">Menthors</h2>
+            <div class="add-container for-menthors">
+              <p>Add menthor</p>
+              <ion-icon class="add-icon" name="person-add-outline"></ion-icon>
+            </div>
+          </header>
+          <div class="example">
+            <div class="item">Name</div>
+            <div class="item">Email address</div>
+            <div class="item">Phone</div>
+          </div>
+          <div id="tableM">
+              {% for user in users %}
+          {% if user.role == 'mentor' %}
+          <div class="person">
+            <div class="item item1">
+              <div class="text-div">
+                <p>{{ user.firstname }} {{ user.lastname }}</p>
+                <p class="usName">@{{ user.username }}</p>
+              </div>
+            </div>
+            <div class="item item2">
+              <p>{{ user.email }}</p>
+            </div>
+            <div class="item item3">
+              <p>{{ user.phone }}</p>
+            </div>
+            <div class="item item4">
+              <!-- delete anelu icon -->
+              <ion-icon name="trash-outline" class="delete person-icon"></ion-icon>
+              <!-- edit anelu icon -->
+              <ion-icon name="create-outline" class="edit person-icon"></ion-icon>
+            </div>
+          </div>
+        {% endif %}
+        {% endfor %}
+          </div>
+        </div>
+        <div id="students-container" class="none">
+          <header class="secondary-header">
+            <h2 class="secondary-heading">Students</h2>
+            <div class="add-container for-students">
+              <p>Add student</p>
+              <ion-icon class="add-icon" name="person-add-outline"></ion-icon>
+            </div>
+          </header>
+          <div class="example">
+            <div class="item">Name</div>
+            <div class="item">Email address</div>
+            <div class="item">Phone</div>
+          </div>
+          <div id="tableS">
+            {% for user in users %}
+          {% if user.role == 'student' %}
+          <div class="person">
+            <div class="item item1">
+              <div class="text-div">
+                <p>{{ user.firstname }} {{ user.lastname }}</p>
+                <p class="usName">@{{ user.username }}</p>
+              </div>
+            </div>
+            <div class="item item2">
+              <p>{{ user.email }}</p>
+            </div>
+            <div class="item item3">
+              <p>{{ user.phone }}</p>
+            </div>
+            <div class="item item4">
+              <!-- delete anelu icon -->
+              <ion-icon name="trash-outline" class="delete person-icon"></ion-icon>
+              <!-- edit anelu icon -->
+              <ion-icon name="create-outline" class="edit person-icon"></ion-icon>
+            </div>
+          </div>
+        {% endif %}
+        {% endfor %}
+          </div>
+        </div>
+          <!--    avelacvac-->
+          <div>
+            ++++++++++++++++++++++++++++++++++++++++++++++++++<br>
+            <h2>Available Teams</h2>
+            {% for team in teams %}
+            <h1>
+              {{ team.team_name }}
+            </h1>
+            <form action="{{ url_for('admin_team_delete') }}" method="POST">
+                  <input type="text" id="teamname" name="teamname" value="{{ team.team_name }}"><br>
+                  <input type="submit" value="Delete">
+                </form>
+            -----------------------<br>
+            {% endfor %}
+            ++++++++++++++++++++++++++++++++++++++++++++++++++<br>
+          </div><br>
+
+          <!--      avelacvac-->
+
+<!--     avelacrac   -->
+
+        <div>
+          ++++++++++++++++++++++++++++++++++++++++++++++++++<br>
+          <h2>Available Attached Team Leads</h2>
+        {% for item in team_and_teamlead %}
+          <h1>{{ item[0].team_name }}   --------------------  {{ item[1].username }}</h1>
+          <form action="{{ url_for('admin_delete_attached_teamlead') }}" method="POST">
+
+            <input type="text" id="fname" name="teamname" value="{{ item[0].team_name }}"><br>
+
+            <input type="text" id="lname" name="username" value="{{ item[1].username }}"><br><br>
+            <input type="submit" value="Delete">
+          </form>
+          ---------------------
+        {% endfor %}
+          ++++++++++++++++++++++++++++++++++++++++++++++++++<br>
+        </div>
+<!--      avelacrac  -->
+<!--        -->
+        <div>
+          ++++++++++++++++++++++++++++++++++++++++++++++++++<br>
+          <h2>Available Attached Courses to Mentors</h2>
+        {% for username, courses_list in attached_mentor_to_course %}
+          <h1>{{ username }}</h1>
+          {% for course_name in  courses_list%}
+          <p>{{ course_name }}</p>
+          {% endfor %}
+          <form action="{{ url_for('admin_delete_mentor_from_course') }}" method="POST">
+
+            <input type="text" id="mentor" name="mentor" value="{{ iusername }}"><br>
+
+
+          </form>
+          ---------------------
+        {% endfor %}
+          ++++++++++++++++++++++++++++++++++++++++++++++++++<br>
+        </div>
+<!--        -->
+<!--        -->
+        <div>
+          ++++++++++++++++++++++++++++++++++++++++++++++++++<br>
+          <h2>Available Courses</h2>
+            {% for course in avalaible_courses %}
+            <h1>
+              {{ course.course_name }}
+            </h1>
+            <form action="{{ url_for('admin_delete_course') }}" method="POST">
+                  <input type="text" id="coursename" name="coursename" value="{{ course.course_name }}"><br>
+                  <input type="submit" value="Delete">
+                </form>
+            -----------------------<br>
+            {% endfor %}
+            ++++++++++++++++++++++++++++++++++++++++++++++++++<br>
+          </div>
+<!---->
+      </div>
+
+    </section>
+
+  </main>
+  <script src="../../../static/admin/dashboard_js/app.js"></script>
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+</body>
+
+</html>

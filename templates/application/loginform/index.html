@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link rel="stylesheet" href="../../../static/loginform/usersLogin_css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./../../static/loginform/usersLogin_css/media.css">
+</head>
+
+<body>
+
+    <section class="container">
+        <header class="nav">
+            <div class="goya-icon">
+                <img src="../../../static/loginform/usersLogin_Img/goya-icon.png" alt="">
+            </div>
+            <div class="a-link">
+                <a href="#">Home</a>
+                <a href="#">About Us</a>
+                <a href="#">Courses</a>
+                <a href="#">Blog</a>
+            </div>
+            <button class="btn" type="button">Log In</button>
+        </header>
+        <hr>
+        <div class="form">
+            <article class="article-block">
+                <p class="text first-line">Best Learning </p>
+                <p class="text second-line">Education Platform in</p>
+                <p class="text third-line">The World</p>
+                <p class="lorem-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    Audax negotium, dicerem impudens, nisi hoc institut
+                    translatum ad philosophos nostros esset.
+                </p>
+            </article>
+            <div class="students-icons">
+                    <div class="courses">
+                        <p><ion-icon name="checkmark-outline" class="check-icon"></ion-icon>
+                            IT Courses
+                        </p>
+                        <p><ion-icon name="checkmark-outline" class="check-icon"></ion-icon>
+                            Expert teachers
+                        </p>
+                    </div>
+                    <div class="first-student-icon">
+                        <img src="../../../static/loginform/usersLogin_Img/students.jpg" alt="">
+                    </div>
+                    <div class="happy-students-icon">
+                        <img src="../../../static/loginform/usersLogin_Img/happy-students.jpg" alt="">
+                    </div>
+            </div>
+        </div>
+    </section>
+
+    <form class="form2 opacity" action="{{ url_for('login') }}" method=post>
+            {{ form.csrf_token }}
+        <div class="close-div"><ion-icon name="close-outline" class="delete-icon"></ion-icon></div>
+        <div>
+            <label for="username" class="label">Username</label>
+            <input name="username" type="text" placeholder="Username" />
+        </div>
+        <div class="passwd">
+            <label class="label" for="password">Password</label>
+            <div class="passwd-child">
+                <input id="password" name="password" type="password" placeholder="Password" required />
+                <div class="eye-cont">
+                    <ion-icon class="close-eye" name="eye-off-outline"></ion-icon>
+                    <ion-icon class="eye none" name="eye-outline"></ion-icon>
+                </div>
+            </div>
+        </div>
+        <div class="btn-sub-cansel">
+            <button class="btn-cancel button" type="button">Cancel</button>
+            <button><input class="btn-sub button" type=submit value=Login></button>
+<!--            <button class="btn-sub button" type="button">Submit</button>-->
+        </div>
+    </form>
+
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <script src="../../../static/loginform/usersLogin_js/main.js"></script>
+</body>
+
+</html>

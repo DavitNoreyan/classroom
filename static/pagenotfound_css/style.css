@@ -1,0 +1,61 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+
+body {
+  font-family: 'Noto Sans', sans-serif;
+}
+
+
+main {
+  display: grid;
+  grid-template-columns: 1fr;
+  width: 50%;
+  margin-left: auto;
+  margin-right: auto;
+
+}
+
+.svg {
+  stroke: #437f97;
+}
+
+h1 {
+  text-align: center;
+  font-weight: 500;
+  font-size: 3.2rem;
+  margin-bottom: 1.4rem;
+  color: #437f97;
+}
+
+h2 {
+  font-size: 2.4rem;
+  text-align: center;
+  font-weight: 400;
+  opacity: 0.8;
+  color: #437f97;
+  margin-bottom: 1.4rem;
+}
+
+p {
+  font-size: 1.2rem;
+  text-align: center;
+  opacity: 0.8;
+  color: #437f97;
+}
+
+.img-box {
+  margin-top: 2.4rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.img-box svg {
+  width: 50%;
+  display: inline-block;
+
+}
