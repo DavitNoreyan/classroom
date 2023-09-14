@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="media.css">
+  <title>Dashboard</title>
+</head>
+
+<body>
+  <form class="form">
+    <div class="form-header">
+      <h3>Add user</h3>
+      <div class="close-icon-div">
+        <ion-icon class="form-close" name="close-outline"></ion-icon>
+      </div>
+    </div>
+
+
+
+    <div class="form-cont full">
+      <label for="teamname">Team Name</label>
+      <input name="teamname" type="text" placeholder="Team Name" required class="inpforTeams none" />
+    </div>
+    <div class="form-cont half">
+      <label for="teamlead">Teamlead</label>
+      <input name="teamlead" type="text" placeholder="Teamlead" required class="inpforTeams none" />
+    </div>
+    <div class="form-cont half">
+      <label for="phone">Phone</label>
+      <input name="phone" type="text" placeholder="phone" required class="inpforTeams none" />
+    </div>
+
+
+
+
+
+
+
+
+
+    <div class="form-cont half inp">
+      <label for="firstname">First Name</label>
+      <input name="firstname" type="text" placeholder="First Name" required />
+    </div>
+    <div class="form-cont half inp">
+      <label for="lastname">Last Name</label>
+      <input name="lastname" type="text" placeholder="Last Name" required />
+    </div>
+    <div class="form-cont half inp">
+      <label for="email">Email</label>
+      <input name="email" type="email" placeholder="Email" required />
+    </div>
+    <div class="form-cont half inp">
+      <label for="date">Date</label>
+      <input class="dateName" name="date" type="date" required />
+    </div>
+    <div class="form-cont inp">
+      <label for="username">Username</label>
+      <input name="username" type="text" placeholder="Username" required />
+    </div>
+    <div class="form-cont half inp">
+      <label for="phone">Phone Number</label>
+      <div class="phone-cont">
+        <div class="flag-cont">
+          <img src="am.svg" alt="" class="flag-icon">
+          <p class="num">+374</p>
+        </div>
+        <input name="phone" type="tel" placeholder="Phone Number" required />
+      </div>
+
+    </div>
+    <div class="form-cont half passwd inp">
+      <label for="password">Password</label>
+      <div class="passwd-child">
+        <input id="password" name="password" type="password" placeholder="Password" required />
+        <div class="eye-cont">
+          <ion-icon class="close-eye" name="eye-off-outline"></ion-icon>
+          <ion-icon class="eye none" name="eye-outline"></ion-icon>
+        </div>
+      </div>
+
+
+
+    </div>
+    <div class="form-cont half passwd inp">
+      <label for="confirm-password">Confirm Password</label>
+      <div class="passwd-child">
+        <input id="confirm-password" name="confirm-password" type="password" placeholder="Confirm Password" required />
+        <div class="eye-cont">
+          <ion-icon class="close-eye2" name="eye-off-outline"></ion-icon>
+          <ion-icon class="eye2 none" name="eye-outline"></ion-icon>
+        </div>
+      </div>
+    </div>
+    <div class="for-form-buttons">
+      <button type="button" class="form-cancel">Cancel</button>
+      <button type="button" class="form-btn">Submit</button>
+    </div>
+
+  </form>
+  <main class="main-container">
+    <section class="left-container">
+      <div class="img-box">
+        <img src="white_logo.png" alt="goya-logo" class="logo-icon">
+      </div>
+      <div class="dropdown">
+        <div class="drop-icons">
+          <ion-icon class="menu" name="menu-outline"></ion-icon>
+          <ion-icon class="nonmenu none" name="close-outline"></ion-icon>
+        </div>
+        <nav class="nav">
+          <div id="admins">Admins</div>
+          <div id="menthors">Menthors</div>
+          <div id="students">Students</div>
+          <div id="teams">Teams</div>
+        </nav>
+      </div>
+
+    </section>
+
+    <section class="right-container">
+      <div class="main-dashboard">
+        <div id="admins-container">
+          <header class="secondary-header">
+            <h2 class="secondary-heading">Admins</h2>
+            <div class="add-container for-admins">
+              <p>Add admin</p>
+              <ion-icon class="add-icon" name="person-add-outline"></ion-icon>
+            </div>
+          </header>
+          <div class="example">
+            <div class="item">Name</div>
+            <div class="item">Email address</div>
+            <div class="item">Phone</div>
+          </div>
+          <div id="tableA">
+            <div class="person">
+              <div class="item item1">
+                <div class="text-div">
+                  <p>firstname lastname</p>
+                  <p class="usName">username</p>
+                </div>
+              </div>
+              <div class="item item2">
+                <p>Email</p>
+              </div>
+              <div class="item item3">
+                <p>Phone</p>
+              </div>
+              <div class="item item4">
+                <!-- delete anelu icon -->
+                <a href="#" class="iconsA">
+                  <ion-icon name="trash-outline" class="delete person-icon"></ion-icon>
+                </a>
+
+                <!-- edit anelu icon -->
+                <a href="#" class="iconsA">
+                  <ion-icon name="create-outline" class="edit person-icon"></ion-icon>
+                </a>
+
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="menthors-container" class="none">
+          <header class="secondary-header">
+            <h2 class="secondary-heading">Menthors</h2>
+            <div class="add-container for-menthors">
+              <p>Add menthor</p>
+              <ion-icon class="add-icon" name="person-add-outline"></ion-icon>
+            </div>
+          </header>
+          <div class="example">
+            <div class="item">Name</div>
+            <div class="item">Email address</div>
+            <div class="item">Phone</div>
+          </div>
+          <div id="tableM">
+
+          </div>
+        </div>
+        <div id="students-container" class="none">
+          <header class="secondary-header">
+            <h2 class="secondary-heading">Students</h2>
+            <div class="add-container for-students">
+              <p>Add student</p>
+              <ion-icon class="add-icon" name="person-add-outline"></ion-icon>
+            </div>
+          </header>
+          <div class="example">
+            <div class="item">Name</div>
+            <div class="item">Email address</div>
+            <div class="item">Phone</div>
+          </div>
+          <div id="tableS">
+          </div>
+        </div>
+        <div id="teams-container" class="none">
+          <header class="secondary-header">
+            <h2 class="secondary-heading">Teams</h2>
+            <div class="add-container for-teams">
+              <p>Add team</p>
+              <ion-icon class="add-icon" name="person-add-outline"></ion-icon>
+            </div>
+          </header>
+          <div class="example">
+            <div class="item">Team Name</div>
+            <div class="item">teamlead</div>
+            <div class="item">Phone</div>
+          </div>
+          <div id="tableA">
+            <div class="person">
+              <div class="item item1">
+                <div class="text-div">
+                  <p>Name</p>
+                  <!-- <p class="usName">username</p> -->
+                </div>
+              </div>
+              <div class="item item2">
+                <p>teamlead</p>
+              </div>
+              <div class="item item3">
+                <p>Phone</p>
+              </div>
+              <div class="item item4">
+                <!-- delete anelu icon -->
+                <a href="#" class="iconsA">
+                  <ion-icon name="trash-outline" class="delete person-icon"></ion-icon>
+                </a>
+
+                <!-- edit anelu icon -->
+                <a href="#" class="iconsA">
+                  <ion-icon name="create-outline" class="edit person-icon"></ion-icon>
+                </a>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+  </main>
+  <script src="app.js"></script>
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+</body>
+
+</html>

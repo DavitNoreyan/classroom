@@ -1,0 +1,39 @@
+@media(max-width:75em) {
+  .group-box {
+    width: 90%;
+  }
+
+  .form {
+    width: 90%;
+  }
+}
+
+
+@media(max-width:56.25em) {
+  .main {
+    height: max-content;
+    grid-template-columns: 1fr;
+    row-gap: 7rem;
+  }
+
+  .right {
+    grid-row: 1/2;
+    margin-top: 7rem;
+  }
+
+  .left {
+    grid-row: 2/3;
+    gap: 3.2rem;
+  }
+
+  .group-box {
+    width: 60%;
+  }
+}
+
+
+@media(max-width:46.25em) {
+  .group-box {
+    width: 80%;
+  }
+}

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="media.css">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign up</title>
+</head>
+
+<body>
+  <section class="main">
+    <div class="left">
+      <div class="img-box">
+        <img src="goya_logo.png" alt="goya_logo" class="goya-img">
+      </div>
+      <form class="form">
+        <div>
+          <label for="username" class="label">Username</label>
+          <input name="username" type="text" placeholder="Username" />
+        </div>
+
+        <div class="passwd">
+          <label class="label" for="password">Password</label>
+          <div class="passwd-child">
+            <input id="password" name="password" type="password" placeholder="Password" required />
+            <div class="eye-cont">
+              <ion-icon class="close-eye" name="eye-off-outline"></ion-icon>
+              <ion-icon class="eye none" name="eye-outline"></ion-icon>
+            </div>
+          </div>
+        </div>
+        <div class="submit-cont">
+          <a class="a">Sumbit</a>
+        </div>
+      </form>
+    </div>
+    <div class="right">
+      <div class="group-box">
+        <img src="Group.png" alt="" class="group-img">
+      </div>
+    </div>
+  </section>
+  <script src="app.js"></script>
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+</body>
+
+</html>
