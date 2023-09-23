@@ -76,7 +76,7 @@ class Course(db.Model):
 
 
     def course_to_dict(self):
-        return {'id':self.id, 'course_name':self.course_name}
+        return {'id': self.id, 'course_name':self.course_name}
 
 
 class Team(db.Model):

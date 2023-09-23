@@ -52,6 +52,33 @@ def save_file(file, course_name, topic_subtopic, sec_filename, root_path):
     return
 
 
+def sort_and_filter_users(users, sort_array, filter_object):
+    if sort_array:
+        field, order = sort_array
+        reverse_order = order.upper() == "DESC"
+
+        sort_mapping = {
+            "id": lambda user: user.id,
+            "firstname": lambda user: user.name,
+        }
+
+        if field in sort_mapping:
+            users.sort(key=sort_mapping[field], reverse=reverse_order)
+        else:
+            users.sort(key=lambda user: user.id, reverse=reverse_order)
+
+    filtered_users = []
+    for user in users:
+        meets_criteria = True
+        for key, value in filter_object.items():
+            if hasattr(user, key) and getattr(user, key) != value:
+                meets_criteria = False
+                break
+        if meets_criteria:
+            filtered_users.append(user)
+
+    return filtered_users
+
 
 
 
