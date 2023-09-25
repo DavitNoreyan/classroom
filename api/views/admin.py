@@ -1,9 +1,11 @@
 # from flask_security import roles_required
+import json
 from datetime import datetime
 
-from flask import request, jsonify
+from flask import request, jsonify, make_response
 from flask_cors import cross_origin
 from flask_jwt_extended import create_access_token, jwt_required
+from sqlalchemy import desc, asc
 
 from app import app, db, login_manager
 from helpers import generate_hash, sort_and_filter_users
@@ -36,35 +38,64 @@ def login_admin():
 @jwt_required()
 def get_users(userrole):
     if request.method == 'GET':
-        sort_field = request.args.get('sort_field')
-        sort_order = request.args.get('sort_order')
-        filter_field = request.args.get('filter_field')
-        filter_value = request.args.get('filter_value')
+        # Your existing code for querying and filtering data
+
         role = Role.query.filter_by(role_name=userrole).first()
         if role:
-            user_role_entries = UserRoles.query.filter_by(role_id=role.id).all()
+            user_role_entries = UserRoles.query.filter_by(
+                role_id=role.id).all()
             user_ids = [entry.user_id for entry in user_role_entries]
+            user_length = len(user_ids)
+            query = User.query.filter(User.id.in_(user_ids))
 
-            users = User.query.filter(User.id.in_(user_ids)).all()
+            # Parse and apply filters
+            filter_param = request.args.get('filter')
+            if filter_param:
+                filter_dict = json.loads(filter_param)
+                if 'username' in filter_dict:
+                    query = query.filter(User.username.ilike(
+                        f"%{filter_dict['username']}%"))
 
-            sort_array = [sort_field, sort_order] if sort_field and sort_order else []
-            filter_object = {filter_field: filter_value} if filter_field and filter_value else {}
+            # Parse and apply sorting
+            sort_param = request.args.get('sort')
+            if sort_param:
+                sort_array = json.loads(sort_param)
+                if len(sort_array) == 2:
+                    field = sort_array[0]
+                    order = sort_array[1].lower()
+                    if order == 'asc':
+                        query = query.order_by(getattr(User, field))
+                    elif order == 'desc':
+                        query = query.order_by(getattr(User, field).desc())
 
-            sorted_and_filtered_users = sort_and_filter_users(users, sort_array, filter_object)
+            # Parse and apply pagination
+            range_param = request.args.get('range')
+            if range_param:
+                range_array = json.loads(range_param)
+                if len(range_array) == 2:
+                    start = range_array[0]
+                    end = range_array[1]
+                    # Adding 1 to include the last item
+                    query = query.slice(start, end + 1)
 
-            users_list = [user.user_to_dict() for user in sorted_and_filtered_users]
+            users = query.all()
+            users_list = [user.user_to_dict() for user in users]
 
-            # Count the number of users with the specified user role
-            userrole_count = len(users_list)
+            for i in users_list:
+                i["id"] = str(i["id"])
 
-            # Create the response dictionary with users and userrole count
-            response_data = {f'{userrole}s': users_list, f'{userrole}s_count': userrole_count}
+            # Set the Content-Range header
 
-            return jsonify(response_data), 200
+            response = make_response(users_list)
+            response.headers['content-range'] = user_length
+
+            return response, 200
+
         else:
             return jsonify(message='Role not found'), 404
     else:
         return jsonify(message='Method Not Allowed'), 405
+
 
 
 @app.route('/admin/courses', methods=['POST', 'GET', 'PUT', 'DELETE'])
@@ -158,29 +189,6 @@ def admin_teams():
     return jsonify(message='Method Not Allowed'), 405
 
 
-
-
-@app.route('/admin/<userrole>/<int:id>', methods=['GET'])
-@jwt_required()
-def get_user_info(userrole, id):
-    if request.method == 'GET':
-        role = Role.query.filter_by(role_name=userrole).first()
-        if role:
-            user_role_entry = UserRoles.query.filter_by(role_id=role.id, user_id=id).first()
-            if user_role_entry:
-                user = User.query.filter_by(id=id).first()
-                if user:
-                    return jsonify({f'{userrole}_info': user.user_to_dict()}), 200
-                else:
-                    return jsonify(message='User not found'), 404
-            else:
-                return jsonify(message=f'{userrole} role not assigned to the user'), 404
-        else:
-            return jsonify(message='Role not found'), 404
-
-    return jsonify(message='Method Not Allowed'), 405
-
-
 @app.route('/admin/register_user', methods=['POST'])
 @jwt_required()
 def register_user():
@@ -215,12 +223,25 @@ def register_user():
         return jsonify(message='bad request'), 400
     return jsonify(message='Method Not Allowed'), 405
 
-
-# ---Samo---#
-@app.route('/admin/edit_user/<id>', methods=['PUT'])
+@app.route('/admin/<userrole>/<int:id>', methods=['GET', 'PUT', 'DELETE'])
 @jwt_required()
-def edit_user(id):
-    if request.method == "PUT":
+def get_user_info(userrole, id):
+    if request.method == 'GET':
+        role = Role.query.filter_by(role_name=userrole).first()
+        if role:
+            user_role_entry = UserRoles.query.filter_by(role_id=role.id, user_id=id).first()
+            if user_role_entry:
+                user = User.query.filter_by(id=id).first()
+                if user:
+                    return jsonify({f'{userrole}_info': user.user_to_dict()}), 200
+                else:
+                    return jsonify(message='User not found'), 404
+            else:
+                return jsonify(message=f'{userrole} role not assigned to the user'), 404
+        else:
+            return jsonify(message='Role not found'), 404
+
+    elif request.method == 'PUT':
         user = User.query.filter_by(id=id).first()
         if user:
             data = request.json
@@ -248,22 +269,18 @@ def edit_user(id):
             db.session.commit()
             return jsonify(message='Successfully edited'), 200
         return jsonify(message='User not found'), 404
-    return jsonify(message='Method Not Allowed'), 405
 
-
-# ---Samo---#
-
-@app.route('/admin/delete_user/<id>', methods=['DELETE'])
-@jwt_required()
-def delete_user(id):
-    if request.method == 'DELETE':
+    elif request.method == 'DELETE':
         user = User.query.filter_by(id=id).first()
         if user:
             db.session.delete(user)
             db.session.commit()
+            return jsonify(message='User deleted successfully'), 200
         else:
-            return jsonify(message='bad request'), 400
-    return jsonify({'message': 'User deleted successfully'}), 200
+            return jsonify(message='User not found'), 404
+
+    return jsonify(message='Method Not Allowed'), 405
+
 
 
 @app.route('/admin/attache_mentor_course', methods=['POST'])
@@ -297,3 +314,55 @@ def attache_teamlead_course():
         else:
             return jsonify({'message': 'user or Team does not exist'}), 405
     return jsonify(message='bad request'), 400
+
+
+
+# ---Samo---#
+# TODO <userrrole> combain delete route by id  + get
+# @app.route('/admin/edit_user/<id>', methods=['PUT'])
+# @jwt_required()
+# def edit_user(id):
+#     if request.method == "PUT":
+#         user = User.query.filter_by(id=id).first()
+#         if user:
+#             data = request.json
+#             new_firstname = data.get('firstname')
+#             new_lastname = data.get('lastname')
+#             new_username = data.get('username')
+#             new_email = data.get('email')
+#             new_phone = data.get('phone')
+#             new_password = data.get('password')
+#             new_birthday = data.get('birthday')
+#             new_role = data.get('role')
+#
+#             user.firstname = new_firstname
+#             user.lastname = new_lastname
+#             user.username = new_username
+#             user.email = new_email
+#             user.phone = new_phone
+#             user.password = generate_hash(new_password)
+#             user.birthday = datetime.strptime(new_birthday, "%Y-%m-%d").date()
+#
+#             role = Role.query.filter_by(role_name=new_role).first()
+#             if role:
+#                 user.roles = [role]
+#
+#             db.session.commit()
+#             return jsonify(message='Successfully edited'), 200
+#         return jsonify(message='User not found'), 404
+#     return jsonify(message='Method Not Allowed'), 405
+#
+#
+#
+# @app.route('/admin/delete_user/<id>', methods=['DELETE'])
+# @jwt_required()
+# def delete_user(id):
+#     if request.method == 'DELETE':
+#         user = User.query.filter_by(id=id).first()
+#         if user:
+#             db.session.delete(user)
+#             db.session.commit()
+#         else:
+#             return jsonify(message='bad request'), 400
+#     return jsonify({'message': 'User deleted successfully'}), 200
+

@@ -24,7 +24,7 @@ login_manager.init_app(app)
 jwt = JWTManager()
 jwt.init_app(app)
 
-
+cors = CORS(app, resources={r"/*": {"origins": "*"}}, expose_headers=["content-range", "Access-Control-Allow-Origin"])
 
 # csrf = CSRFProtect(app)
 

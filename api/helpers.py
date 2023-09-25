@@ -3,6 +3,8 @@ from hashlib import sha256
 from random import randint
 import operator
 
+from sqlalchemy import asc, desc
+
 from constants import ALLOWED_EXTENSIONS
 
 
@@ -52,32 +54,38 @@ def save_file(file, course_name, topic_subtopic, sec_filename, root_path):
     return
 
 
-def sort_and_filter_users(users, sort_array, filter_object):
-    if sort_array:
-        field, order = sort_array
-        reverse_order = order.upper() == "DESC"
+def sort_and_filter_users(users_query, filter_query, sort_query, range_query):
+    # Apply filtering
+    if filter_query:
+        # Parse filter query, e.g., "field_name:value"
+        filter_parts = filter_query.split(':')
+        if len(filter_parts) == 2:
+            filter_field, filter_value = filter_parts
+            users_query = users_query.filter(getattr(User, filter_field) == filter_value)
 
-        sort_mapping = {
-            "id": lambda user: user.id,
-            "firstname": lambda user: user.name,
-        }
+    # Apply sorting
+    if sort_query:
+        # Parse sort query, e.g., "field:order"
+        sort_parts = sort_query.split(':')
+        if len(sort_parts) == 2:
+            sort_field, sort_order = sort_parts
+            if sort_order == 'asc':
+                users_query = users_query.order_by(asc(sort_field))
+            elif sort_order == 'desc':
+                users_query = users_query.order_by(desc(sort_field))
 
-        if field in sort_mapping:
-            users.sort(key=sort_mapping[field], reverse=reverse_order)
-        else:
-            users.sort(key=lambda user: user.id, reverse=reverse_order)
+    # Paginate the results
+    if range_query:
+        # Parse range query, e.g., "page:per_page"
+        range_parts = range_query.split(':')
+        if len(range_parts) == 2:
+            page, per_page = map(int, range_parts)
+            users_paginated = users_query.paginate(page, per_page, False)
+            users_list = [user.user_to_dict() for user in users_paginated.items]
 
-    filtered_users = []
-    for user in users:
-        meets_criteria = True
-        for key, value in filter_object.items():
-            if hasattr(user, key) and getattr(user, key) != value:
-                meets_criteria = False
-                break
-        if meets_criteria:
-            filtered_users.append(user)
+            return users_list, users_paginated.pages
 
-    return filtered_users
+    return [], 0
 
 
 

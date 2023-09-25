@@ -1,0 +1,722 @@
+{
+	"info": {
+		"_postman_id": "46f7bbfc-770b-4a8e-b944-7ca531d7e996",
+		"name": "Admin routes collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "28309023",
+		"_collection_link": "https://warped-crater-530959.postman.co/workspace/My-Workspace~d6a8abfc-b190-4f64-84fd-3a9b53230db8/collection/28309023-46f7bbfc-770b-4a8e-b944-7ca531d7e996?action=share&source=collection_link&creator=28309023"
+	},
+	"item": [
+		{
+			"name": "Admin login",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY5NTEwODgyMSwianRpIjoiNTQyYjhmOWMtMTNlNi00OGUwLWI3NDctMWEyM2VmYjczY2ZhIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6ImFkbWluIiwibmJmIjoxNjk1MTA4ODIxLCJleHAiOjE2OTUxMDk3MjF9.XqOsO5I5IAgqkvgCTY5G7AgTb1sExKN1FIi2TC2YoVk",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"admin\",\n    \"password\": \"123456\"\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/admin/login",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"admin",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Attach user to team",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY5NTQ4Mzg4NSwianRpIjoiOTZiMDY3ZTQtYjQ1ZC00NGY1LWE0NzAtN2Y3N2MzZDIzNjQwIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6ImFkbWluIiwibmJmIjoxNjk1NDgzODg1LCJleHAiOjE2OTU0ODQ3ODV9.tfQCEt9r3GZzfiiyrVZ4Yj3BFFhuwVGVGRia2ob8P7M",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"team_id\": \"5\",\n    \"user_id\": \"14\"\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/admin/attach_user_to_team",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"admin",
+						"attach_user_to_team"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Register user",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY5NTEzNDg4MywianRpIjoiN2ZjZWEwYjUtYzMwZi00ZTc5LTk3ZTAtMzU3MWViYzBkYmY0IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6ImFkbWluIiwibmJmIjoxNjk1MTM0ODgzLCJleHAiOjE2OTUxMzU3ODN9.TXDfyibWfuCdjGWo7nu1OPcPUSs6LrrrrmNZf4A_aF0",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"firstname\": \"Gor\",\n    \"lastname\": \"Hovhannisyan\",\n    \"username\": \"Gor55\",\n    \"email\": \"gor@gmail.com\",\n    \"phone\": \"091672559\",\n    \"password\": \"12345678912\",\n    \"birthday\": \"1996-11-09\",\n    \"role\": \"student\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/admin/register_user",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"admin",
+						"register_user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Attach mentor to course",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY5NTEyNzI0MSwianRpIjoiNjI5MDc2NzYtNjBlMC00NTgwLTkzMTktZmE0Y2E2MWI0NjkyIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6ImFkbWluIiwibmJmIjoxNjk1MTI3MjQxLCJleHAiOjE2OTUxMjgxNDF9.U8GcSJlmVMfLb1VVKXFfvHGPRiaIICp2rXFipadevkc",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n   \"course_id\": 2,\n   \"mentor_id\": 3\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/admin/attache_mentor_course",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"admin",
+						"attache_mentor_course"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getting all users + query params(---)",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY5NTU1NTk5MSwianRpIjoiNTkzMjgzZjYtYzM2ZS00YTQxLWI1ZWEtMGFjZjhkY2Q5N2E1IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6ImFkbWluIiwibmJmIjoxNjk1NTU1OTkxLCJleHAiOjE2OTU1NTY4OTF9.n4JP6EP1oiZuLnri5WhOuYkwbXeIO04WQuj55TjEgY8",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"sort_field\": \"name\",\n    \"sort_order\": \"asc\",\n    \"filter_field\": \"role\",\n    \"filter_value\": \"admin\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/admin/student?filter={\"username\": \"Ando\"}&sort=[\"username\",\"asc\"]&range=[0,9]",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"admin",
+						"student"
+					],
+					"query": [
+						{
+							"key": "filter",
+							"value": "{\"username\": \"Ando\"}"
+						},
+						{
+							"key": "sort",
+							"value": "[\"username\",\"asc\"]"
+						},
+						{
+							"key": "range",
+							"value": "[0,9]"
+						},
+						{
+							"key": "filter_field",
+							"value": "firstname",
+							"disabled": true
+						},
+						{
+							"key": "filter_value",
+							"value": "Ando",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get teams",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY5NTQ4Mzg4NSwianRpIjoiOTZiMDY3ZTQtYjQ1ZC00NGY1LWE0NzAtN2Y3N2MzZDIzNjQwIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6ImFkbWluIiwibmJmIjoxNjk1NDgzODg1LCJleHAiOjE2OTU0ODQ3ODV9.tfQCEt9r3GZzfiiyrVZ4Yj3BFFhuwVGVGRia2ob8P7M",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": \"6\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/admin/teams",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"admin",
+						"teams"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get user by id",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY5NTYzOTU4NiwianRpIjoiZmFlYjMzNDYtOWY4NS00ZThhLWE5NzgtOGE3YzRmYmRjNDkyIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6ImFkbWluIiwibmJmIjoxNjk1NjM5NTg2LCJleHAiOjE2OTU2NDA0ODZ9.g9I1OjRdhDUMObbtUtwSyFlgR0xjfApMdeTrrBGOCkA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/admin/student/12",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"admin",
+						"student",
+						"12"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Edit user by id",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY5NTYzOTU4NiwianRpIjoiZmFlYjMzNDYtOWY4NS00ZThhLWE5NzgtOGE3YzRmYmRjNDkyIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6ImFkbWluIiwibmJmIjoxNjk1NjM5NTg2LCJleHAiOjE2OTU2NDA0ODZ9.g9I1OjRdhDUMObbtUtwSyFlgR0xjfApMdeTrrBGOCkA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{            \n    \"firstname\": \"Murade\",\n    \"lastname\": \"Rustavelit\",\n    \"username\": \"Murdishurtyrt\",\n    \"email\": \"mr15do@gmail.com\",\n    \"phone\": \"099977859\",\n    \"password\": \"1q2w3e4r5t\",\n    \"birthday\": \"1939-09-02\",\n    \"role\": \"student\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/admin/student/14",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"admin",
+						"student",
+						"14"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete user by id",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY5NTYzOTU4NiwianRpIjoiZmFlYjMzNDYtOWY4NS00ZThhLWE5NzgtOGE3YzRmYmRjNDkyIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6ImFkbWluIiwibmJmIjoxNjk1NjM5NTg2LCJleHAiOjE2OTU2NDA0ODZ9.g9I1OjRdhDUMObbtUtwSyFlgR0xjfApMdeTrrBGOCkA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{            \n    \"firstname\": \"Murade\",\n    \"lastname\": \"Rustavelit\",\n    \"username\": \"Murdishurtyrt\",\n    \"email\": \"mr15do@gmail.com\",\n    \"phone\": \"099977859\",\n    \"password\": \"1q2w3e4r5t\",\n    \"birthday\": \"1939-09-02\",\n    \"role\": \"student\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/admin/student/14",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"admin",
+						"student",
+						"14"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add course",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY5NTY0MDY0OCwianRpIjoiN2E2ZmUwZWItYTFiZC00ZTU2LWIwN2YtMWYxMjFiYjJkMGNiIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6ImFkbWluIiwibmJmIjoxNjk1NjQwNjQ4LCJleHAiOjE2OTU2NDE1NDh9.qC9mfDRMYrYfE1gHKrkTpJ7NEcgAmlNwuF8GRtaHTc0",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"course_name\": \"AWS\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/admin/courses",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"admin",
+						"courses"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Edit course",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY5NTY0MDY0OCwianRpIjoiN2E2ZmUwZWItYTFiZC00ZTU2LWIwN2YtMWYxMjFiYjJkMGNiIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6ImFkbWluIiwibmJmIjoxNjk1NjQwNjQ4LCJleHAiOjE2OTU2NDE1NDh9.qC9mfDRMYrYfE1gHKrkTpJ7NEcgAmlNwuF8GRtaHTc0",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": \"16\",\n    \"course_new_name\": \"AWS 2\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/admin/courses",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"admin",
+						"courses"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete course",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY5NTY0MDY0OCwianRpIjoiN2E2ZmUwZWItYTFiZC00ZTU2LWIwN2YtMWYxMjFiYjJkMGNiIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6ImFkbWluIiwibmJmIjoxNjk1NjQwNjQ4LCJleHAiOjE2OTU2NDE1NDh9.qC9mfDRMYrYfE1gHKrkTpJ7NEcgAmlNwuF8GRtaHTc0",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": \"16\"    \n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/admin/courses",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"admin",
+						"courses"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get teams",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY5NTY0MjI2NiwianRpIjoiMmJiMzhiOWUtNzk3ZS00MGFmLTgzMGMtMzkxYTAyYmUzZTI4IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6ImFkbWluIiwibmJmIjoxNjk1NjQyMjY2LCJleHAiOjE2OTU2NDMxNjZ9.Ko2WGI4kq0xxUi36lU7p6EmmReMGRnnXQHEc0cavf7U",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": \"6\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/admin/teams",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"admin",
+						"teams"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add team",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY5NTY0MjI2NiwianRpIjoiMmJiMzhiOWUtNzk3ZS00MGFmLTgzMGMtMzkxYTAyYmUzZTI4IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6ImFkbWluIiwibmJmIjoxNjk1NjQyMjY2LCJleHAiOjE2OTU2NDMxNjZ9.Ko2WGI4kq0xxUi36lU7p6EmmReMGRnnXQHEc0cavf7U",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"team_name\": \"Test\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/admin/teams",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"admin",
+						"teams"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Edit team",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY5NTY0MjI2NiwianRpIjoiMmJiMzhiOWUtNzk3ZS00MGFmLTgzMGMtMzkxYTAyYmUzZTI4IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6ImFkbWluIiwibmJmIjoxNjk1NjQyMjY2LCJleHAiOjE2OTU2NDMxNjZ9.Ko2WGI4kq0xxUi36lU7p6EmmReMGRnnXQHEc0cavf7U",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": \"7\",\n    \"team_new_name\": \"Test2\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/admin/teams",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"admin",
+						"teams"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete team",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY5NTY0MjI2NiwianRpIjoiMmJiMzhiOWUtNzk3ZS00MGFmLTgzMGMtMzkxYTAyYmUzZTI4IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6ImFkbWluIiwibmJmIjoxNjk1NjQyMjY2LCJleHAiOjE2OTU2NDMxNjZ9.Ko2WGI4kq0xxUi36lU7p6EmmReMGRnnXQHEc0cavf7U",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": \"7\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/admin/teams",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"admin",
+						"teams"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
