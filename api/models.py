@@ -43,6 +43,8 @@ class Role(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     role_name = db.Column(db.String(50), nullable=False, unique=True)
 
+    def role_to_dict(self):
+        return {'id': self.id, 'role_name': self.role_name}
 
 class UserRoles(db.Model, RoleMixin):
     __tablename__ = 'roles_users'

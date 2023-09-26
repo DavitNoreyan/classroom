@@ -134,48 +134,6 @@
 			"response": []
 		},
 		{
-			"name": "Attach mentor to course",
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY5NTEyNzI0MSwianRpIjoiNjI5MDc2NzYtNjBlMC00NTgwLTkzMTktZmE0Y2E2MWI0NjkyIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6ImFkbWluIiwibmJmIjoxNjk1MTI3MjQxLCJleHAiOjE2OTUxMjgxNDF9.U8GcSJlmVMfLb1VVKXFfvHGPRiaIICp2rXFipadevkc",
-							"type": "string"
-						}
-					]
-				},
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n   \"course_id\": 2,\n   \"mentor_id\": 3\n}\n",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://127.0.0.1:5000/admin/attache_mentor_course",
-					"protocol": "http",
-					"host": [
-						"127",
-						"0",
-						"0",
-						"1"
-					],
-					"port": "5000",
-					"path": [
-						"admin",
-						"attache_mentor_course"
-					]
-				}
-			},
-			"response": []
-		},
-		{
 			"name": "getting all users + query params(---)",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
@@ -239,51 +197,6 @@
 							"value": "Ando",
 							"disabled": true
 						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Get teams",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY5NTQ4Mzg4NSwianRpIjoiOTZiMDY3ZTQtYjQ1ZC00NGY1LWE0NzAtN2Y3N2MzZDIzNjQwIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6ImFkbWluIiwibmJmIjoxNjk1NDgzODg1LCJleHAiOjE2OTU0ODQ3ODV9.tfQCEt9r3GZzfiiyrVZ4Yj3BFFhuwVGVGRia2ob8P7M",
-							"type": "string"
-						}
-					]
-				},
-				"method": "GET",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n    \"id\": \"6\"\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://127.0.0.1:5000/admin/teams",
-					"protocol": "http",
-					"host": [
-						"127",
-						"0",
-						"0",
-						"1"
-					],
-					"port": "5000",
-					"path": [
-						"admin",
-						"teams"
 					]
 				}
 			},
@@ -416,6 +329,62 @@
 						"admin",
 						"student",
 						"14"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get courses",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY5NTczMzg5NSwianRpIjoiMzE4NGE3YmItMzlhZi00ODQ3LWJiODgtMzFlZThjMmYzNGRiIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6ImFkbWluIiwibmJmIjoxNjk1NzMzODk1LCJleHAiOjE2OTU3MzQ3OTV9.u4A6To2hf6pnifbxVwFqaD2ObvvkY6pFcdS7Ejybe2k",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"firstname\": \"Vardan\",\n    \"lastname\": \"Karayan\",\n    \"username\": \"Vardan71\",\n    \"email\": \"vardan_71@gmail.com\",\n    \"phone\": \"091545454\",\n    \"password\": \"v091545454\",\n    \"birthday\": \"1998-08-17\",\n    \"role\": \"mentor\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/admin/courses?filter={\"course_name\":\"Example\"}&sort=[\"course_name\",\"asc\"]&range=[0,9]",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"admin",
+						"courses"
+					],
+					"query": [
+						{
+							"key": "filter",
+							"value": "{\"course_name\":\"Example\"}"
+						},
+						{
+							"key": "sort",
+							"value": "[\"course_name\",\"asc\"]"
+						},
+						{
+							"key": "range",
+							"value": "[0,9]"
+						}
 					]
 				}
 			},
@@ -713,6 +682,93 @@
 					"path": [
 						"admin",
 						"teams"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Attache user to course",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY5NTEyNzI0MSwianRpIjoiNjI5MDc2NzYtNjBlMC00NTgwLTkzMTktZmE0Y2E2MWI0NjkyIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6ImFkbWluIiwibmJmIjoxNjk1MTI3MjQxLCJleHAiOjE2OTUxMjgxNDF9.U8GcSJlmVMfLb1VVKXFfvHGPRiaIICp2rXFipadevkc",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n   \"course_id\": 2,\n   \"mentor_id\": 3\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/admin/attache_mentor_course",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"admin",
+						"attache_mentor_course"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get users and courses",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY5NTczNzcwMCwianRpIjoiYTE1YzdiOTYtMGQ2OC00YmY0LWJkMjgtN2FmYmQwZjk5ZDQyIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6ImFkbWluIiwibmJmIjoxNjk1NzM3NzAwLCJleHAiOjE2OTU3Mzg2MDB9.HK9eYhJYx3EOV70Ue4kP_NREoEgzqlaUOs8z8X5Vi1c",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n   \"course_id\": 2,\n   \"mentor_id\": 3\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/admin/attache_mentor_course",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"admin",
+						"attache_mentor_course"
 					]
 				}
 			},
