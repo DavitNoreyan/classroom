@@ -1,4 +1,3 @@
-# from flask_security import roles_required
 import json
 from datetime import datetime
 
@@ -8,7 +7,7 @@ from flask_jwt_extended import create_access_token, jwt_required
 
 from app import app, db, login_manager
 from helpers import generate_hash
-from models import User, Course, Team, Role, UserRoles, MentorOfCourse, TeamLeadOfTeam
+from models import User, Course, Team, Role, UserRoles, MentorOfCourse
 
 
 @login_manager.user_loader
@@ -25,9 +24,15 @@ def login_admin():
         password = data['password']
         user = User.query.filter_by(
             username=username, password=generate_hash(password)).first()
+        # print(user.id)
+        user_role = UserRoles.query.filter_by(user_id=user.id).first()
+        # print(user_role.role_id)
+        roles = Role.query.filter_by(id=user_role.role_id).first()
+        # print(roles.role_name)
         if user:
             access_token = create_access_token(identity=username)
-            return jsonify(access_token=access_token), 200
+            role_name = roles.role_name
+            return jsonify(access_token=access_token, role_name=role_name), 200
         else:
             return jsonify(message='Invalid username or password'), 401
     return jsonify(message='Method Not Allowed'), 405
@@ -115,9 +120,7 @@ def get_users(userrole):
         return jsonify(message='Method Not Allowed'), 405
 
 
-
-
-@app.route('/admin/courses', methods=['POST', 'GET', 'PUT', 'DELETE'])
+@app.route('/admin/courses', methods=['POST', 'GET'])
 @jwt_required()
 def admin_courses():
     if request.method == 'POST':
@@ -130,6 +133,7 @@ def admin_courses():
             return jsonify({'message': 'Course added successfully'}), 200
         else:
             return jsonify(message='Bad request'), 400
+
     elif request.method == 'GET':
         course_query = Course.query
 
@@ -139,7 +143,6 @@ def admin_courses():
             if 'course_name' in filter_dict:
                 course_query = course_query.filter(
                     Course.course_name.ilike(f"%{filter_dict['course_name']}%"))
-
         sort_param = request.args.get('sort')
         if sort_param:
             sort_array = json.loads(sort_param)
@@ -147,7 +150,8 @@ def admin_courses():
                 field = sort_array[0]
                 order = sort_array[1].lower()
                 if order == 'asc':
-                    course_query = course_query.order_by(getattr(Course, field))
+                    course_query = course_query.order_by(
+                        getattr(Course, field))
                 elif order == 'desc':
                     course_query = course_query.order_by(
                         getattr(Course, field).desc())
@@ -162,103 +166,81 @@ def admin_courses():
 
         courses = course_query.all()
         course_list = [course.course_to_dict() for course in courses]
-
-        return jsonify(courses=course_list), 200
-
-    elif request.method == 'PUT':
-        data = request.json
-        course_id = data.get('id')
-        course_new_name = data.get('course_new_name')
-        course = Course.query.filter_by(id=course_id).first()
-        if course:
-            course.course_name = course_new_name
-            db.session.commit()
-            return jsonify({'message': 'Course edited successfully'}), 200
-        else:
-            return jsonify(message='Bad request'), 400
-
-    elif request.method == 'DELETE':
-        data = request.json
-        course_id = data.get('id')
-        course = Course.query.filter_by(id=course_id).first()
-        if course:
-            db.session.delete(course)
-            db.session.commit()
-            return jsonify({'message': 'Course deleted successfully'}), 200
-        else:
-            return jsonify(message='Bad request'), 400
-    return jsonify(message='Method Not Allowed'), 405
+        row_count = course_query.count()
+        response = make_response(course_list)
+        response.headers['content-range'] = row_count
+        return response, 200
 
 
-@app.route('/admin/teams', methods=['GET', 'POST', 'PUT', 'DELETE'])
-@jwt_required()
-def admin_teams():
-    if request.method == 'GET':
-        team_query = Team.query
-
-        filter_param = request.args.get('filter')
-        if filter_param:
-            filter_dict = json.loads(filter_param)
-            if 'team_name' in filter_dict:
-                team_query = team_query.filter(
-                    Team.team_name.ilike(f"%{filter_dict['team_name']}%"))
-
-        sort_param = request.args.get('sort')
-        if sort_param:
-            sort_array = json.loads(sort_param)
-            if len(sort_array) == 2:
-                field = sort_array[0]
-                order = sort_array[1].lower()
-                if order == 'asc':
-                    team_query = team_query.order_by(getattr(Team, field))
-                elif order == 'desc':
-                    team_query = team_query.order_by(
-                        getattr(Team, field).desc())
-
-        range_param = request.args.get('range')
-        if range_param:
-            range_array = json.loads(range_param)
-            if len(range_array) == 2:
-                start = range_array[0]
-                end = range_array[1]
-                team_query = team_query.slice(start, end + 1)
-
-        teams = team_query.all()
-        teams_list = [team.team_to_dict() for team in teams]
-
-        return jsonify(teams=teams_list), 200
-    elif request.method == 'POST':
-        data = request.json
-        team_name = data.get('team_name')
-        if team_name:
-            team = Team(team_name=team_name)
-            db.session.add(team)
-            db.session.commit()
-            return jsonify({'message': 'Team added successfully'}), 200
-        else:
-            return jsonify(message='Bad request'), 400
-    elif request.method == 'PUT':
-        data = request.json
-        team_id = data.get('id')
-        team_new_name = data.get('team_new_name')
-        team = Team.query.filter_by(id=team_id).first()
-        if team:
-            team.team_name = team_new_name
-            db.session.commit()
-            return jsonify({'message': 'Team edited successfully'}), 200
-        else:
-            return jsonify(message='Bad request'), 400
-    elif request.method == 'DELETE':
-        data = request.json
-        team_id = data.get('id')
-        team = Team.query.filter_by(id=team_id).first()
-        if team:
-            db.session.delete(team)
-            db.session.commit()
-            return jsonify({'message': 'Team deleted successfully'}), 200
-        else:
-            return jsonify(message='Bad request'), 400
-    return jsonify(message='Method Not Allowed'), 405
+# @app.route('/admin/teams', methods=['GET', 'POST', 'PUT', 'DELETE'])
+# @jwt_required()
+# def admin_teams():
+#     if request.method == 'GET':
+#         team_query = Team.query
+#
+#         filter_param = request.args.get('filter')
+#         if filter_param:
+#             filter_dict = json.loads(filter_param)
+#             if 'team_name' in filter_dict:
+#                 team_query = team_query.filter(
+#                     Team.team_name.ilike(f"%{filter_dict['team_name']}%"))
+#
+#         sort_param = request.args.get('sort')
+#         if sort_param:
+#             sort_array = json.loads(sort_param)
+#             if len(sort_array) == 2:
+#                 field = sort_array[0]
+#                 order = sort_array[1].lower()
+#                 if order == 'asc':
+#                     team_query = team_query.order_by(getattr(Team, field))
+#                 elif order == 'desc':
+#                     team_query = team_query.order_by(
+#                         getattr(Team, field).desc())
+#
+#         range_param = request.args.get('range')
+#         if range_param:
+#             range_array = json.loads(range_param)
+#             if len(range_array) == 2:
+#                 start = range_array[0]
+#                 end = range_array[1]
+#                 team_query = team_query.slice(start, end + 1)
+#
+#         teams = team_query.all()
+#         teams_list = [team.team_to_dict() for team in teams]
+#
+#         return jsonify(teams=teams_list), 200
+#     elif request.method == 'POST':
+#         data = request.json
+#         team_name = data.get('team_name')
+#         if team_name:
+#             team = Team(team_name=team_name)
+#             db.session.add(team)
+#             db.session.commit()
+#             return jsonify({'message': 'Team added successfully'}), 200
+#         else:
+#             return jsonify(message='Bad request'), 400
+#     elif request.method == 'PUT':
+#         data = request.json
+#         team_id = data.get('id')
+#         team_new_name = data.get('team_new_name')
+#         team = Team.query.filter_by(id=team_id).first()
+#         if team:
+#             team.team_name = team_new_name
+#             db.session.commit()
+#             return jsonify({'message': 'Team edited successfully'}), 200
+#         else:
+#             return jsonify(message='Bad request'), 400
+#     elif request.method == 'DELETE':
+#         data = request.json
+#         team_id = data.get('id')
+#         team = Team.query.filter_by(id=team_id).first()
+#         if team:
+#             db.session.delete(team)
+#             db.session.commit()
+#             return jsonify({'message': 'Team deleted successfully'}), 200
+#         else:
+#             return jsonify(message='Bad request'), 400
+#     return jsonify(message='Method Not Allowed'), 405
 
 
 @app.route('/admin/<userrole>/<int:id>', methods=['GET', 'PUT', 'DELETE'])
@@ -370,39 +352,79 @@ def attache_mentor_course(userrole):
                 mentor_and_course.user_id = mentor_id
                 mentor_and_course.course_id = course_id
 
-            db.session.commit()
-            return jsonify({'message': 'Mentor and course attached/updated successfully'}), 200
+                db.session.commit()
+                return jsonify({'message': 'Mentor-course association updated successfully'}), 200
+            else:
+                return jsonify({'message': 'Mentor-course association not found'}), 404
         else:
-            return jsonify(message='Bad request'), 400
-    elif request.method == 'DELETE':
-        data = request.json
-        mentor_id = data.get('mentor_id')
-        course_id = data.get('course_id')
-
-        mentor_and_course = MentorOfCourse.query.filter_by(
-            user_id=mentor_id, course_id=course_id).first()
-
-        if mentor_and_course:
-            db.session.delete(mentor_and_course)
-            db.session.commit()
-            return jsonify({'message': 'Mentor and course deleted successfully'}), 200
-        else:
-            return jsonify(message='Record not found'), 404
+            return jsonify({'message': 'Bad request'}), 400
 
 
-
-@app.route('/admin/attach_user_to_team', methods=['POST'])
+@app.route('/admin/course/<course_id>', methods=['GET', 'PUT', 'DELETE'])
 @jwt_required()
-def attache_teamlead_course():
-    data = request.json
-    if request.method == 'POST':
-        team_id = data.get('team_id')
-        user_id = data.get('user_id')
-        if user_id and team_id:
-            attach_user = TeamLeadOfTeam(user_id=user_id, team_id=team_id)
-            db.session.add(attach_user)
+def get_course_by_id(course_id):
+    if request.method == 'GET':
+        course = Course.query.filter_by(id=course_id).first()
+        if course:
+            return jsonify(course.course_to_dict()), 200
+        return jsonify(message='Course not found'), 404
+    elif request.method == 'PUT':
+        data = request.json
+        course_name = data.get('course_new_name')
+        if course_name:
+            course = Course.query.filter_by(id=course_id).first()
+            if course:
+                course.course_name = course_name
+                db.session.commit()
+                return jsonify({'message': 'Course updated successfully'}), 200
+            return jsonify(message='Course not found'), 404
+        return jsonify(message='Bad request'), 400
+    elif request.method == 'DELETE':
+        course = Course.query.filter_by(id=course_id).first()
+        if course:
+            db.session.delete(course)
             db.session.commit()
-            return jsonify({'message': 'User attached successfully'}), 200
-        else:
-            return jsonify({'message': 'user or Team does not exist'}), 405
-    return jsonify(message='bad request'), 400
+            return jsonify({'message': 'Course deleted successfully'}), 200
+        return jsonify(message='Course not found'), 404
+    return jsonify(message='Bad request'), 400
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# elif request.method == 'PUT':
+#        data = request.json
+#        course_id = data.get('id')
+#        course_new_name = data.get('course_new_name')
+#        course = Course.query.filter_by(id=course_id).first()
+#        if course:
+#            course.course_name = course_new_name
+#            db.session.commit()
+#            return jsonify({'message': 'Course edited successfully'}), 200
+#        else:
+#            return jsonify(message='Bad request'), 400
+#
+#    elif request.method == 'DELETE':
+#        data = request.json
+#        course_id = data.get('id')
+#        course = Course.query.filter_by(id=course_id).first()
+#        if course:
+#            db.session.delete(course)
+#            db.session.commit()
+#            return jsonify({'message': 'Course deleted successfully'}), 200
+#        else:
+#            return jsonify(message='Bad request'), 400
+#    return jsonify(message='Method Not Allowed'), 405
