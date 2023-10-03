@@ -213,7 +213,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY5NTYzOTU4NiwianRpIjoiZmFlYjMzNDYtOWY4NS00ZThhLWE5NzgtOGE3YzRmYmRjNDkyIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6ImFkbWluIiwibmJmIjoxNjk1NjM5NTg2LCJleHAiOjE2OTU2NDA0ODZ9.g9I1OjRdhDUMObbtUtwSyFlgR0xjfApMdeTrrBGOCkA",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY5NTgyMTg3NCwianRpIjoiMmVjMzYxY2ItODY0ZC00Nzk3LWE1MWItNTBmMDIyZmNiMmYxIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6ImFkbWluIiwibmJmIjoxNjk1ODIxODc0LCJleHAiOjE2OTU4MjI3NzR9.nUCVY6omVUaJI3ya0nGJAcB7oHpwgSuBWI8q3AgIJ1c",
 							"type": "string"
 						}
 					]
@@ -517,6 +517,40 @@
 			"response": []
 		},
 		{
+			"name": "Get Course by ID",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY5NjMxOTI0NSwianRpIjoiOGE5ZDIwMzctOGI3NS00MmIxLWI4NzQtM2Q3NTNjNDM3NTM2IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6ImFkbWluIiwibmJmIjoxNjk2MzE5MjQ1LCJleHAiOjE2OTYzMjAxNDV9.0bs0Yyl2uyuIedyCjfjqq8IhYg5yVDLbm1cPtQQRm-Y",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:5000/admin/course/14",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"admin",
+						"course",
+						"14"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Get teams",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
@@ -682,6 +716,40 @@
 					"path": [
 						"admin",
 						"teams"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get team by ID",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY5NjMxOTI0NSwianRpIjoiOGE5ZDIwMzctOGI3NS00MmIxLWI4NzQtM2Q3NTNjNDM3NTM2IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6ImFkbWluIiwibmJmIjoxNjk2MzE5MjQ1LCJleHAiOjE2OTYzMjAxNDV9.0bs0Yyl2uyuIedyCjfjqq8IhYg5yVDLbm1cPtQQRm-Y",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:5000/admin/teams/5",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"admin",
+						"teams",
+						"5"
 					]
 				}
 			},

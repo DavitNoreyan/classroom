@@ -35,16 +35,16 @@ def login():
         if user:
             user_role = UserRoles.query.filter_by(user_id=user.id).first()
             role_name = Role.query.filter_by(id=user_role.role_id).first().role_name
-            if data['username'] == user.username and generate_hash(data['password']) == user.password:
+            if username == user.username and generate_hash(password) == user.password:
                 if role_name == 'mentor':
                     access_token = create_access_token(identity=username)
-                    return jsonify(access_token=access_token), 200
+                    return jsonify(access_token=access_token, role_name=role_name), 200
                 elif role_name == 'teamlead':
                     access_token = create_access_token(identity=username)
-                    return jsonify(access_token=access_token), 200
+                    return jsonify(access_token=access_token, role_name=role_name), 200
                 elif role_name == 'student':
                     access_token = create_access_token(identity=username)
-                    return jsonify(access_token=access_token), 200
+                    return jsonify(access_token=access_token, role_name=role_name), 200
                 else:
                     return jsonify(message='Invalid username or password'), 401
         return jsonify(message='Method Not Allowed'), 405
